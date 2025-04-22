@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Board</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@latest"></script>
+  </head>
+  <body class="bg-gray-100 font-inter">
+    <header class="bg-blue-500 text-white py-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-semibold">JobHunt</h1>
+        <nav class="space-x-4">
+          <a href="#" class="hover:text-blue-300 transition duration-300">Home</a>
+          <a href="#" class="hover:text-blue-300 transition duration-300">About Us</a>
+          <a href="#" class="hover:text-blue-300 transition duration-300">All Jobs</a>
+          <a href="#" class="hover:text-blue-300 transition duration-300">Contact Us</a>
+          <a href="#" class="hover:text-blue-300 transition duration-300">Account</a>
+          <a href="#" class="bg-yellow-500 text-blue-700 px-4 py-2 rounded hover:bg-yellow-600 transition duration-300 font-semibold">Post Jobs</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="bg-gray-100 py-8">
+      <div class="container mx-auto">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Job Filter</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="job-title" class="block text-gray-700 text-sm font-bold mb-2">Job Title</label>
+              <input type="text" id="job-title" placeholder="Keyword, category or company" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+            </div>
+            <div>
+              <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Location</label>
+              <input type="text" id="location" placeholder="City, state or country" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+            </div>
+            <div>
+              <label for="date-posted" class="block text-gray-700 text-sm font-bold mb-2">Date Posted</label>
+              <select id="date-posted" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="">Any</option>
+                <option value="today">Today</option>
+                <option value="3days">Last 3 days</option>
+                <option value="7days">Last 7 days</option>
+              </select>
+            </div>
+            <div>
+              <label for="salary" class="block text-gray-700 text-sm font-bold mb-2">Estimated Salary</label>
+              <select id="salary" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="">Any</option>
+                <option value="10k-25k">10k - 25k</option>
+                <option value="25k-50k">25k - 50k</option>
+                <option value="50k+">50k+</option>
+              </select>
+            </div>
+            <div>
+              <label for="job-type" class="block text-gray-700 text-sm font-bold mb-2">Job Type</label>
+              <select id="job-type" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="">Any</option>
+                <option value="full-time">Full-Time</option>
+                <option value="part-time">Part-Time</option>
+                <option value="internship">Internship</option>
+              </select>
+            </div>
+            <div>
+              <label for="education" class="block text-gray-700 text-sm font-bold mb-2">Education Level</label>
+              <select id="education" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="">Any</option>
+                <option value="high-school">High School</option>
+                <option value="bachelor">Bachelor's Degree</option>
+                <option value="master">Master's Degree</option>
+                <option value="phd">PhD</option>
+              </select>
+            </div>
+             <div>
+              <label for="work-shifts" class="block text-gray-700 text-sm font-bold mb-2">Work Shifts</label>
+              <select id="work-shifts" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="">Any</option>
+                <option value="day">Day Shift</option>
+                <option value="night">Night Shift</option>
+                <option value="flexible">Flexible Shifts</option>
+              </select>
+            </div>
+            <div class="mt-6">
+              <button id="search-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline">Search Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-100 py-8">
+      <div class="container mx-auto">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">All Jobs</h2>
+        <div id="job-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          </div>
+      </div>
+    </section>
+
+    <script>
+      const initialJobs = [
+        {
+          id: '1',
+          company: 'IT Infosys Co.',
+          companyLogo: 'IT',
+          postedDate: '2 days ago',
+          title: 'Senior Web Developer',
+          location: 'Mumbai, India',
+          salary: '10k - 25k',
+          shift: 'Day Shift',
+        },
+        {
+          id: '2',
+          company: 'Ali Media Ltd',
+          companyLogo: 'AM',
+          postedDate: '2 days ago',
+          title: 'Qualified Developer',
+          location: 'Mumbai, India',
+          salary: '9000',
+          shift: 'Flexible Shifts',
+        },
+        {
+          id: '3',
+          company: 'JS Solutions',
+          companyLogo: 'JS',
+          postedDate: 'Posted Today',
+          title: 'Javascript Developer',
+          location: 'Mumbai, India',
+          salary: '10k - 25k',
+          shift: 'Night Shift',
+        },
+        {
+          id: '4',
+          company: 'lindtree Solutions',
+          companyLogo: 'LT',
+          postedDate: '1 day ago',
+          title: 'Java Developer',
+          location: 'Mumbai, India',
+          salary: '20k - 45k',
+          shift: 'Flexible Shifts',
+        },
+        {
+          id: '5',
+          company: 'People Solutions',
+          companyLogo: 'PS',
+          postedDate: '3 days ago',
+          title: 'Frontend Developer',
+          location: 'Hyderabad, India',
+          salary: '80000',
+          shift: 'Flexible Shifts',
+        },
+        {
+          id: '6',
+          company: 'Pure Vision Ltd',
+          companyLogo: 'PV',
+          postedDate: '2 days ago',
+          title: 'Python Developer',
+          location: 'Hyderabad, India',
+          salary: '70000',
+          shift: 'Flexible Shifts',
+        },
+      ];
+
+      function createJobCard(job) {
+        return `
+          <div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center mb-2">
+                <div class="bg-red-500 text-white rounded-md h-10 w-10 flex items-center justify-center mr-2">
+                  <span class="text-lg font-semibold">${job.companyLogo}</span>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800">${job.company}</h3>
+              </div>
+              <p class="text-gray-600 text-sm mb-2">${job.postedDate}</p>
+              <h4 class="text-md font-semibold text-gray-700 mb-2">${job.title}</h4>
+              <p class="text-gray-600 text-sm mb-2">${job.location}</p>
+              <p class="text-gray-600 text-sm mb-2"><span class="font-semibold">Salary:</span> ${job.salary}</p>
+              <p class="text-gray-600 text-sm mb-3"><span class="font-semibold">Shift:</span> ${job.shift}</p>
+            </div>
+            <div class="mt-4">
+              <a href="#" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center">View Details</a>
+            </div>
+          </div>
+        `;
+      }
+
+      function displayJobs(jobs) {
+        const jobContainer = document.getElementById('job-container');
+        jobContainer.innerHTML = jobs.map(createJobCard).join('');
+      }
+
+      function filterJobs() {
+        const titleFilter = document.getElementById('job-title').value.toLowerCase();
+        const locationFilter = document.getElementById('location').value.toLowerCase();
+        const datePostedFilter = document.getElementById('date-posted').value;
+        const salaryFilter = document.getElementById('salary').value;
+        const jobTypeFilter = document.getElementById('job-type').value;
+        const educationFilter = document.getElementById('education').value;
+        const workShiftFilter = document.getElementById('work-shifts').value.toLowerCase();
+
+        const filteredJobs = initialJobs.filter(job => {
+          const titleMatch = job.title.toLowerCase().includes(titleFilter);
+          const locationMatch = job.location.toLowerCase().includes(locationFilter);
+          const datePostedMatch =
+            !datePostedFilter ||
+            (datePostedFilter === 'today' && job.postedDate === 'Posted Today') ||
+            (datePostedFilter === '3days' && job.postedDate.includes('day')) ||
+            (datePostedFilter === '7days' && job.postedDate.includes('day'));
+          const salaryMatch =
+            !salaryFilter ||
+            (salaryFilter === '10k-25k' && job.salary === '10k - 25k') ||
+            (salaryFilter === '25k-50k' && job.salary === '25k - 50k') ||
+            (salaryFilter === '50k+' && job.salary.includes('k'));
+          const jobTypeMatch = !jobTypeFilter ||
+              (jobTypeFilter === 'full-time' && job.shift !== 'Internship' && job.shift !== 'Part-Time') ||
+              (jobTypeFilter === 'part-time' && job.shift === 'Part-Time') ||
+              (jobTypeFilter === 'internship' && job.shift === 'Internship');
+          const educationMatch = true;
+          const workShiftMatch = !workShiftFilter || job.shift.toLowerCase().includes(workShiftFilter);
+
+          return titleMatch && locationMatch && datePostedMatch && salaryMatch && jobTypeMatch && educationMatch && workShiftMatch;
+        });
+
+        displayJobs(filteredJobs);
+      }
+
+      document.getElementById('search-button').addEventListener('click', filterJobs);
+
+      displayJobs(initialJobs);
+    </script>
+  </body>
+</html>
